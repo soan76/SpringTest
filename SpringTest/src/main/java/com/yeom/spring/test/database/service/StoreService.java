@@ -11,11 +11,11 @@ import com.yeom.spring.test.database.repository.StoreRepository;
 @Service
 public class StoreService {
 	
+	// repository의 객체 관리 -> 스프링에 위임
 	@Autowired
 	private StoreRepository storeRepository;
 	
 	public List<Store> getStoreList() {
-		// store 테이블 모든 행 조회
 		List<Store> storeList = storeRepository.selectStoreList();
 		
 		return storeList;
