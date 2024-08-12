@@ -22,9 +22,8 @@
  			`id` = #{id}
  	</select>
  	
- 	<select id="selectRealEstateRent" resultType="com.yeom.spring.test.domain.RealEstate"
- 	parameterType="int">
- 		<![CDATA[
+ 	<select id="selectRealEstateListByRentPrice" parameterType="int"
+ 	resultType="com.yeom.spring.test.mybatis.domain.RealEstate">
 	 		SELECT 
 	 			`id`
 	 			, `realtorId`
@@ -38,8 +37,91 @@
 	 		FROM 
 	 			`real_estate`
 	 		WHERE 
-	 			`rentPrice` < #{rentPrice}
- 		]]>
+	 			<![CDATA[`rentPrice` < #{rentPrice}]]>
  	</select>
+ 	
+ 	<select id="selectRealEstateListByAreaAndPrice" parameterType="map"
+ 	resultType="com.yeom.spring.test.mybatis.domain.RealEstate">
+ 		SELECT 
+	 			`id`
+	 			, `realtorId`
+	 			, `address`
+	 			, `area`
+	 			, `type`
+	 			, `price`
+	 			, `rentPrice`
+	 			, `createdAt`
+	 			, `updatedAt` 
+	 		FROM 
+	 			`real_estate`
+	 		WHRER
+	 			<![CDATA[
+	 			`area` >= #{area}
+	 			AND `price` <= #{price}
+	 			AND `type` = '매매'
+	 			]]>
+ 	</select>
+ 	
+ 	<insert id="insertRealEstateByObject" parameterType="com.yeom.spring.test.mybatis.domain.RealEstate">
+ 		INSERT INTO
+ 			`real_estate`
+ 		(
+ 			`realtorId`
+	 		, `address`
+	 		, `area`
+	 		, `type`
+			, `price`
+	 		, `rentPrice`
+ 		)
+ 		VALUE
+ 		(
+ 			#{realtorId}
+ 			, #{address}
+ 			, #{area}
+ 			, #{type}
+ 			, #{price}
+ 			, #{rentPrice}
+ 		)
+ 	</insert>
+ 	
+ 	<insert id="insetRealEstate" parameterType="map">
+ 		INSERT INTO
+ 			`real_estate`
+ 		(
+ 			`realtorId`
+	 		, `address`
+	 		, `area`
+	 		, `type`
+			, `price`
+	 		, `rentPrice`
+ 		)
+ 		VALUE
+ 		(
+ 			#{realtorId}
+ 			, #{address}
+ 			, #{area}
+ 			, #{type}
+ 			, #{price}
+ 			, #{rentPrice}
+ 		)
+ 	</insert>
+ 	
+ 	<update id="updateRealEstate" parameterType="map">
+ 		UPDATE
+ 			`real_estate`
+ 		SET
+ 			`type` = #{type}
+ 			, `price` = #{price}
+ 			, `updatedAt` = now()
+ 		WHERE
+ 			`id` = #{id}	
+ 	</update>
+ 	
+ 	<delete id="deleteRealEstate" parameterType="int">
+ 		DELETE FROM
+ 			`real_estate`
+ 		WHERE
+ 			`id` = #{id}
+ 	</delete>
  	
  </mapper>

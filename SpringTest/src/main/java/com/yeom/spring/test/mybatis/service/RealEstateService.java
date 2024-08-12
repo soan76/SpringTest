@@ -20,10 +20,47 @@ public class RealEstateService {
 		return realEstate;
 	}
 	
-	public List<RealEstate> getrealEstateRent(int rent) {
-		List<RealEstate> realEstateRent = realEstateRepository.selectRealEstateRent(rent);
+	public List<RealEstate> getrealEstateByRentPrice(int rentPrice) {
+		List<RealEstate> realEstateList = realEstateRepository.selectRealEstateListByRentPrice(rentPrice);
 		
-		return realEstateRent;
+		return realEstateList;
 	}
+	
+	public List<RealEstate> getRealEstateListByAreaPrice(int area, int price) {
+		List<RealEstate> realEstateList = realEstateRepository.selectRealEstateListByAreaAndPrice(area, price);
+		
+		return realEstateList;
+	}
+	
+	public int addRealEstateByObject(RealEstate realEstate) {
+		
+		int count = realEstateRepository.insertRealEstateByObject(realEstate);
+		
+		return count;
+	}
+	
+	public int addrealEstate(
+			int realtorId
+			, String address
+			, int area
+			, String type
+			, int price
+			, int rentPrice
+			) {
+		int count = realEstateRepository.insertRealEstate(realtorId, address, area, type, price, rentPrice);
+		
+		return count;
+	}
+	public int updateRealEstate (int id, String type, int price) {
+		int count = realEstateRepository.updateRealEstate(id, type, price);
+		return count;
+	}
+	
+	public int deleteRealEstate(int id) {
+		int count = realEstateRepository.deleteRealEstate(id);
+		return count;
+	}
+	
+	
 	
 }
