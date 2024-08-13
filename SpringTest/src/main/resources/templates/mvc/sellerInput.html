@@ -6,14 +6,20 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 </head>
 <body>
-	
+	<h1>판매자 추가</h1>
 	<div id="container">
-		<h2>판매자 정보</h2>
-		
-		<img width="200" th:src="${seller.profileImage}" src="https://cdn.pixabay.com/photo/2024/07/08/05/41/girl-8880144_1280.png">
-		
-		<div class="display-4" th:text="${seller.nickname}">다팔아</div>
-		<h2 class="text-warnig" th:text="${seller.temperature}">32.2</h2>
+		<form method="get" action="/mvc/seller/create">
+			<label>닉네임</label>
+			<input type="text" name="nickname" class="form-control col-3">
+			
+			<label>프로필 사진 url</label>
+			<input type="text" name="profileImage" class="form-control col-6">
+			
+			<label>온도</label>
+			<input type="text" name="temperature" class="form-control col-3">
+			
+			<button type="submit" class="btn btn-primary mt-3">추가</button>
+		</form>
 	</div>
 	
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
