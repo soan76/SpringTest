@@ -68,11 +68,42 @@ public class bookingController {
 	}
 	
 	@GetMapping("/delete")
-	public deleteBooking(@RequestParam("id") int id) {
+	public Map<String, String> deleteBooking(@RequestParam("id") int id) {
 		
 		int count = bookingService.deleteBooking(id);
 		
+		// {"result":"success"}
+		// {"result":"fail"}
+		
+		Map<String, String> resultMap = new HashMap<>(); 
+		if(count == 1) {
+			resultMap.put("result", "success");
+		} else {
+			resultMap.put("result", "fail");
+		}
 		//  reload = 새로고침
+		return resultMap;
+	}
+	
+	@GetMapping("/search")
+	public Map<String, Object> searchBooking(
+			@RequestParam("name") String name
+			, @RequestParam("phoneNumber") String phoneNumber) {
+		
+		Map<String, Object> resultMap = new HashMap<>();
+		
+		Booking booking = bookingService.getBooking(name, phoneNumber);
+		
+		if(booking != null) {
+			resultMap.put("result", "success");
+			resultMap.put("booking", booking);
+		} else {
+			resultMap.put("result", "fail");
+		}
+		
+		
+		return resultMap;
+		
 	}
 	
 }

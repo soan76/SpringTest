@@ -29,6 +29,7 @@
  			`name`
  			, `headcount`
  			, `day`
+ 			, `date`
  			, `phoneNumber`
  			, `state`
  		)
@@ -36,6 +37,7 @@
  			#{name}
  			, #{headcount}
  			, #{day}
+ 			, #{date}
  			, #{phoneNumber}
  			, #{state}
  		)
@@ -47,5 +49,24 @@
  		WHERE
  			`id` = #{id}
  	</delete>
+ 	
+ 	<select id="selectBooking" parameterType="map"
+ 	resultType="com.yeom.spring.test.ajax.domain.Booking">
+ 		SELECT
+ 			`id`
+ 			, `name`
+ 			, `headcount`
+ 			, `day`
+ 			, `date`
+ 			, `phoneNumber`
+ 			, `state`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`booking`
+ 		WHERE
+ 			`name` = #{name}
+ 			AND `phoneNumber` = #{phoneNumber}	
+ 	</select>
  
  </mapper>
